@@ -40,6 +40,16 @@ class DBConnection {
         RDS_PASSWORD,
       } = process.env;
 
+      if (
+        !RDS_PORT ||
+        !RDS_DB_NAME ||
+        !RDS_USERNAME ||
+        !RDS_PASSWORD ||
+        !RDS_HOSTNAME
+      ) {
+        console.error(process.env);
+        throw new Error("Missing some environment variables...");
+      }
       console.log(
         "process.env.RDS_HOSTNAME, RDS_USERNAME:",
         process.env.RDS_HOSTNAME,
