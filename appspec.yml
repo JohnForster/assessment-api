@@ -1,0 +1,3 @@
+hooks:
+  ApplicationStart:
+    - location: start.sh
