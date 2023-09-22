@@ -30,7 +30,24 @@ class DBConnection {
       );
     }
 
-    const sequelize = new Sequelize(connectionString);
+    let sequelize;
+    if (process.env.NODE_ENV === "production") {
+      const {
+        RDS_HOSTNAME,
+        RDS_PORT,
+        RDS_DB_NAME,
+        RDS_USERNAME,
+        RDS_PASSWORD,
+      } = process.env;
+
+      sequelize = new Sequelize(RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD, {
+        host: RDS_HOSTNAME,
+        port: parseInt(RDS_PORT),
+        dialect: "postgres",
+      });
+    } else {
+      sequelize = new Sequelize(connectionString);
+    }
 
     try {
       await sequelize.authenticate();
