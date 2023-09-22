@@ -40,6 +40,12 @@ class DBConnection {
         RDS_PASSWORD,
       } = process.env;
 
+      console.log(
+        "process.env.RDS_HOSTNAME, RDS_USERNAME:",
+        process.env.RDS_HOSTNAME,
+        process.env.RDS_USERNAME
+      );
+
       sequelize = new Sequelize(RDS_DB_NAME, RDS_USERNAME, RDS_PASSWORD, {
         host: RDS_HOSTNAME,
         port: parseInt(RDS_PORT),
